@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10K FORGE — 8-Week Training Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --coal: #111111;
+    --iron: #1c1c1c;
+    --steel: #2a2a2a;
+    --chrome: #888;
+    --silver: #bbb;
+    --white: #f0ede8;
+    --fire: #ff4d00;
+    --amber: #ffb347;
+    --teal: #00c9a7;
+    --blue: #3a86ff;
+    --red: #ff2d55;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 80px 8vw;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255,77,0,0.07) 0%, transparent 70%),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.02) 80px),
+      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.02) 80px);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--fire);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 14vw, 14rem);
+    line-height: 0.88;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s forwards;
+  }
+
+  .hero h1 span {
+    -webkit-text-stroke: 1px var(--fire);
+    color: transparent;
+  }
+
+  .hero-sub {
+    margin-top: 36px;
+    max-width: 520px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--chrome);
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s forwards;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.65s forwards;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--fire);
+    letter-spacing: 0.05em;
+  }
+
+  .stat-lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--chrome);
+    text-transform: uppercase;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 8vw;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--steel);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .scroll-hint::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--fire);
+    animation: lineExpand 1.5s infinite;
+  }
+
+  @keyframes lineExpand {
+    0%, 100% { width: 20px; opacity: 0.3; }
+    50% { width: 50px; opacity: 1; }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,77,0,0.15);
+    padding: 0 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--fire);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--chrome);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--fire); }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 100px 8vw;
+    border-top: 1px solid var(--iron);
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--fire);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: 0.03em;
+    margin-bottom: 48px;
+  }
+
+  /* ── PHILOSOPHY ── */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .phil-card {
+    background: var(--iron);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .phil-card:hover { background: var(--steel); }
+
+  .phil-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--fire);
+    transition: width 0.4s;
+  }
+
+  .phil-card:hover::after { width: 100%; }
+
+  .phil-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: rgba(255,77,0,0.12);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .phil-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .phil-body {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--silver);
+  }
+
+  /* ── WEEKLY SCHEDULE ── */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .day-card {
+    background: var(--iron);
+    padding: 24px 16px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .day-card:hover {
+    background: var(--steel);
+    transform: translateY(-4px);
+    z-index: 2;
+  }
+
+  .day-card.rest {
+    background: #0f0f0f;
+    opacity: 0.5;
+  }
+
+  .day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: var(--chrome);
+  }
+
+  .day-focus {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .day-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    width: fit-content;
+  }
+
+  .tag-run { background: rgba(58,134,255,0.15); color: var(--blue); }
+  .tag-lift { background: rgba(255,77,0,0.15); color: var(--fire); }
+  .tag-mob { background: rgba(0,201,167,0.15); color: var(--teal); }
+  .tag-rest { background: rgba(100,100,100,0.1); color: var(--chrome); }
+
+  .day-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .day-items li {
+    font-size: 0.78rem;
+    color: var(--silver);
+    line-height: 1.4;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .day-items li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--fire);
+    font-size: 0.65rem;
+  }
+
+  /* ── RUNNING PROGRAM ── */
+  .phase-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 32px;
+  }
+
+  .phase-tab {
+    padding: 12px 28px;
+    background: var(--iron);
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--chrome);
+    transition: all 0.2s;
+  }
+
+  .phase-tab.active {
+    background: var(--fire);
+    color: var(--black);
+    font-weight: 500;
+  }
+
+  .phase-tab:hover:not(.active) {
+    background: var(--steel);
+    color: var(--white);
+  }
+
+  .phase-content { display: none; }
+  .phase-content.active { display: block; }
+
+  .run-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .run-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--chrome);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--steel);
+  }
+
+  .run-table td {
+    padding: 16px;
+    font-size: 0.88rem;
+    color: var(--silver);
+    border-bottom: 1px solid var(--iron);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .run-table tr:hover td { background: var(--iron); }
+
+  .run-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--fire);
+    white-space: nowrap;
+  }
+
+  .pace-badge {
+    display: inline-block;
+    background: rgba(58,134,255,0.12);
+    color: var(--blue);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+  }
+
+  /* ── LIFTING ── */
+  .lift-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .lift-block {
+    background: var(--iron);
+    padding: 36px;
+  }
+
+  .lift-block-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lift-block-title .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fire);
+    flex-shrink: 0;
+  }
+
+  .lift-phase-note {
+    font-size: 0.8rem;
+    color: var(--teal);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    background: rgba(0,201,167,0.07);
+    border-left: 2px solid var(--teal);
+  }
+
+  .exercise-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .exercise-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--steel);
+  }
+
+  .exercise-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .ex-name {
+    font-size: 0.9rem;
+    color: var(--white);
+    font-weight: 400;
+    margin-bottom: 3px;
+  }
+
+  .ex-cue {
+    font-size: 0.75rem;
+    color: var(--chrome);
+    line-height: 1.4;
+  }
+
+  .ex-sets {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--amber);
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  /* ── MOBILITY ── */
+  .mob-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .mob-card {
+    background: var(--iron);
+    padding: 36px;
+    border-left: 3px solid var(--teal);
+  }
+
+  .mob-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .mob-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .mob-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mob-list li {
+    font-size: 0.85rem;
+    color: var(--silver);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .mob-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-size: 0.7rem;
+  }
+
+  /* ── PACE CHART ── */
+  .pace-guide {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .pace-card {
+    background: var(--iron);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .pace-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--chrome);
+    margin-bottom: 12px;
+  }
+
+  .pace-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pace-unit {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--chrome);
+    margin-bottom: 16px;
+  }
+
+  .pace-desc {
+    font-size: 0.78rem;
+    color: var(--silver);
+    line-height: 1.5;
+  }
+
+  .pace-bar {
+    height: 3px;
+    border-radius: 2px;
+    margin-top: 20px;
+  }
+
+  /* ── PROGRESSION TRACKER ── */
+  .prog-timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .prog-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--fire), var(--amber), var(--teal));
+  }
+
+  .prog-item {
+    position: relative;
+    margin-bottom: 48px;
+  }
+
+  .prog-item::before {
+    content: '';
+    position: absolute;
+    left: -44px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--fire);
+    border: 2px solid var(--black);
+  }
+
+  .prog-week {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--fire);
+    margin-bottom: 8px;
+  }
+
+  .prog-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .prog-body {
+    font-size: 0.85rem;
+    color: var(--silver);
+    line-height: 1.65;
+    max-width: 600px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 60px 8vw;
+    border-top: 1px solid var(--iron);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    color: var(--fire);
+  }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--steel);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .week-grid { grid-template-columns: repeat(3, 1fr); }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .lift-grid { grid-template-columns: 1fr; }
+    .mob-grid { grid-template-columns: 1fr; }
+    .pace-guide { grid-template-columns: 1fr 1fr; }
+    nav .nav-links { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .week-grid { grid-template-columns: 1fr; }
+    .pace-guide { grid-template-columns: 1fr; }
+    .hero h1 { font-size: clamp(4rem, 20vw, 8rem); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top" style="border-top: none;">
+  <p class="hero-tag">// Custom Training Program — Built For You</p>
+  <h1>10K<br><span>FORGE</span></h1>
+  <p class="hero-sub">
+    An 8-week performance plan engineered to break sub-45 minute 10K speed. Combines structured run workouts, Olympic lifting progressions, and joint-first mobility — built around your exact fitness baseline.
+  </p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-val">8</span>
+      <span class="stat-lbl">Weeks</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">3–4</span>
+      <span class="stat-lbl">Runs / Week</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">7:30</span>
+      <span class="stat-lbl">HM Pace Base</span>
+    </div>
+    <div class="stat">
+      <span class="stat-val">~43</span>
+      <span class="stat-lbl">Target 10K (min)</span>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to program</div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">10K Forge</span>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#running">Running</a></li>
+    <li><a href="#lifting">Lifting</a></li>
+    <li><a href="#mobility">Mobility</a></li>
+    <li><a href="#progression">Progression</a></li>
+  </ul>
+</nav>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <p class="section-label">// 01 — Foundations</p>
+  <h2 class="section-title">Program Philosophy</h2>
+  <div class="philosophy-grid">
+    <div class="phil-card">
+      <div class="phil-num">01</div>
+      <div class="phil-title">Speed Is Built Aerobically</div>
+      <p class="phil-body">80% of your running will be easy — truly easy. Zone 2 aerobic base work teaches your body to burn fat efficiently and supports higher training volume without accumulated fatigue. Speed comes from a deep aerobic engine, not just hard intervals.</p>
+    </div>
+    <div class="phil-card">
+      <div class="phil-num">02</div>
+      <div class="phil-title">Joints Before Load</div>
+      <p class="phil-body">Knees Over Toes and Strength Side protocols build bulletproof ankles, knees, and hips before we add heavy barbell work. The goal is tissue capacity first — this eliminates the #1 runner injury pattern and unlocks Olympic lifting safely.</p>
+    </div>
+    <div class="phil-card">
+      <div class="phil-num">03</div>
+      <div class="phil-title">Technique Precedes Intensity</div>
+      <p class="phil-body">Squat cleans and snatches are skill movements. Weeks 1–3 are exclusively technique — PVC pipe and empty bar only. Load increases only after movement patterns are automated. Rushing this phase is the single biggest mistake beginner Olympic lifters make.</p>
+    </div>
+    <div class="phil-card">
+      <div class="phil-num">04</div>
+      <div class="phil-title">Progression Is Planned, Not Random</div>
+      <p class="phil-body">The 8 weeks are divided into three clear gears: Foundation (wks 1–3), Build (wks 4–6), and Sharpen + Taper (wks 7–8). Each block has a defined purpose. Week 8 is your taper and race week — your body will be primed. Trust the structure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WEEKLY SCHEDULE -->
+<section id="schedule">
+  <p class="section-label">// 02 — Weekly Blueprint</p>
+  <h2 class="section-title">Sample Week (Weeks 4–6)</h2>
+  <div class="week-grid">
+    <div class="day-card">
+      <div class="day-name">Monday</div>
+      <span class="day-tag tag-run">Run</span>
+      <div class="day-focus">Speed Intervals</div>
+      <ul class="day-items">
+        <li>1 mi easy warm-up</li>
+        <li>6 × 800m @ 10K goal pace</li>
+        <li>90 sec jog recovery</li>
+        <li>1 mi easy cool-down</li>
+        <li>~5.5 miles total</li>
+      </ul>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Tuesday</div>
+      <span class="day-tag tag-lift">Lifting + Mob</span>
+      <div class="day-focus">Olympic Skill + KOT</div>
+      <ul class="day-items">
+        <li>10 min KOT warm-up circuit</li>
+        <li>Hang power clean 4×4</li>
+        <li>Snatch balance 4×3</li>
+        <li>Goblet squat + RDL accessory</li>
+        <li>15 min Strength Side mobility</li>
+      </ul>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Wednesday</div>
+      <span class="day-tag tag-run">Run</span>
+      <div class="day-focus">Easy Base</div>
+      <ul class="day-items">
+        <li>4–5 miles easy</li>
+        <li>Zone 2 — conversational pace</li>
+        <li>~8:30–9:00/mi</li>
+        <li>Focus: relaxed form, nasal breath</li>
+      </ul>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Thursday</div>
+      <span class="day-tag tag-lift">Lifting</span>
+      <div class="day-focus">Full Clean + Snatch</div>
+      <ul class="day-items">
+        <li>Squat clean 4×3 @ 55–60%</li>
+        <li>Power snatch 4×3</li>
+        <li>Front squat 3×5 (moderate)</li>
+        <li>Hip mobility cool-down</li>
+      </ul>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Friday</div>
+      <span class="day-tag tag-rest">Rest / Walk</span>
+      <div class="day-focus">Active Recovery</div>
+      <ul class="day-items">
+        <li>20–30 min easy walk</li>
+        <li>Foam roll quads, IT band</li>
+        <li>Light KOT ATG squats</li>
+        <li>Optional: breathing work</li>
+      </ul>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Saturday</div>
+      <span class="day-tag tag-run">Run</span>
+      <div class="day-focus">Long Run</div>
+      <ul class="day-items">
+        <li>7–8 miles easy</li>
+        <li>Zone 2 only — no heroics</li>
+        <li>Final 1 mi at tempo pace</li>
+        <li>~8:30–9:15/mi</li>
+      </ul>
+    </div>
+    <div class="day-card rest">
+      <div class="day-name">Sunday</div>
+      <span class="day-tag tag-rest">Rest</span>
+      <div class="day-focus">Full Rest</div>
+      <ul class="day-items">
+        <li>Complete rest</li>
+        <li>Sleep 8+ hrs</li>
+        <li>Hydrate & refuel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RUNNING PROGRAM -->
+<section id="running">
+  <p class="section-label">// 03 — Running Workouts</p>
+  <h2 class="section-title">8-Week Run Plan</h2>
+
+  <!-- Pace Guide -->
+  <div style="margin-bottom: 48px;">
+    <p style="font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--chrome); margin-bottom: 16px;">Your Personalized Pace Zones</p>
+    <div class="pace-guide">
+      <div class="pace-card">
+        <div class="pace-type">Easy / Z2</div>
+        <div class="pace-val">8:45</div>
+        <div class="pace-unit">min/mile</div>
+        <div class="pace-desc">Conversational. Nose breathing possible. Most of your miles live here.</div>
+        <div class="pace-bar" style="background: #1a3a6e;"></div>
+      </div>
+      <div class="pace-card">
+        <div class="pace-type">Tempo</div>
+        <div class="pace-val">7:45</div>
+        <div class="pace-unit">min/mile</div>
+        <div class="pace-desc">Comfortably hard. Can speak short phrases. Lactate threshold training.</div>
+        <div class="pace-bar" style="background: #3a86ff;"></div>
+      </div>
+      <div class="pace-card">
+        <div class="pace-type">10K Goal</div>
+        <div class="pace-val">7:00</div>
+        <div class="pace-unit">min/mile</div>
+        <div class="pace-desc">Race effort. Hard but controlled. Target = ~43:30 for 10K.</div>
+        <div class="pace-bar" style="background: var(--amber);"></div>
+      </div>
+      <div class="pace-card">
+        <div class="pace-type">Rep Pace</div>
+        <div class="pace-val">6:30</div>
+        <div class="pace-unit">min/mile</div>
+        <div class="pace-desc">Short intervals only. Near max effort. Full recovery between reps.</div>
+        <div class="pace-bar" style="background: var(--fire);"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('phase1')">Phase 1 — Foundation (Wk 1–3)</button>
+    <button class="phase-tab" onclick="showPhase('phase2')">Phase 2 — Build (Wk 4–6)</button>
+    <button class="phase-tab" onclick="showPhase('phase3')">Phase 3 — Sharpen + Race (Wk 7–8)</button>
+  </div>
+
+  <div id="phase1" class="phase-content active">
+    <table class="run-table">
+      <thead>
+        <tr>
+          <th>Week / Day</th>
+          <th>Workout Type</th>
+          <th>Details</th>
+          <th>Total Miles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>WK 1 — Mon</td><td>Easy Run</td><td>3 mi easy <span class="pace-badge">8:45/mi</span> — feel it out, assess current fitness</td><td>3</td></tr>
+        <tr><td>WK 1 — Wed</td><td>Easy Run</td><td>3 mi easy. Focus on form: tall posture, 170+ cadence</td><td>3</td></tr>
+        <tr><td>WK 1 — Sat</td><td>Long Run</td><td>5 mi easy <span class="pace-badge">8:45–9:15/mi</span>. First long run — don't push.</td><td>5</td></tr>
+        <tr><td>WK 2 — Mon</td><td>Strides + Easy</td><td>3 mi easy + 4 × 20-sec strides (fast but smooth, full recovery between each)</td><td>3.5</td></tr>
+        <tr><td>WK 2 — Wed</td><td>Easy Run</td><td>4 mi easy <span class="pace-badge">8:45/mi</span></td><td>4</td></tr>
+        <tr><td>WK 2 — Fri</td><td>Easy Run (opt)</td><td>3 mi very easy — optional 4th run day</td><td>3</td></tr>
+        <tr><td>WK 2 — Sat</td><td>Long Run</td><td>6 mi easy with final mile at tempo <span class="pace-badge">7:45/mi</span></td><td>6</td></tr>
+        <tr><td>WK 3 — Mon</td><td>Tempo Intro</td><td>Warm 1 mi + 2 × 1 mi tempo <span class="pace-badge">7:45/mi</span> with 3 min jog recovery + cool 1 mi</td><td>5</td></tr>
+        <tr><td>WK 3 — Wed</td><td>Easy Run</td><td>4 mi easy</td><td>4</td></tr>
+        <tr><td>WK 3 — Sat</td><td>Long Run</td><td>6 mi easy. Body is adapting — hold the pace down.</td><td>6</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="phase2" class="phase-content">
+    <table class="run-table">
+      <thead>
+        <tr>
+          <th>Week / Day</th>
+          <th>Workout Type</th>
+          <th>Details</th>
+          <th>Total Miles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>WK 4 — Mon</td><td>800m Intervals</td><td>Warm 1 mi + 5 × 800m @ <span class="pace-badge">7:00/mi</span> + 90s jog recovery + cool 1 mi</td><td>6</td></tr>
+        <tr><td>WK 4 — Wed</td><td>Easy Run</td><td>4 mi easy <span class="pace-badge">8:45/mi</span></td><td>4</td></tr>
+        <tr><td>WK 4 — Thu</td><td>Easy Run (opt)</td><td>3 mi very easy — 4th run day option</td><td>3</td></tr>
+        <tr><td>WK 4 — Sat</td><td>Long Run</td><td>7 mi easy with miles 5–6 at tempo <span class="pace-badge">7:45/mi</span></td><td>7</td></tr>
+        <tr><td>WK 5 — Mon</td><td>Mile Repeats</td><td>Warm 1 mi + 3 × 1 mi @ <span class="pace-badge">7:00/mi</span> + 2 min standing rest + cool 1 mi</td><td>6</td></tr>
+        <tr><td>WK 5 — Wed</td><td>Easy Run</td><td>5 mi easy</td><td>5</td></tr>
+        <tr><td>WK 5 — Sat</td><td>Long Run</td><td>7 mi easy — hold zone 2, no heroics</td><td>7</td></tr>
+        <tr><td>WK 6 — Mon</td><td>6 × 800m</td><td>Warm 1 mi + 6 × 800m @ <span class="pace-badge">7:00/mi</span> + 90s jog + cool 1 mi</td><td>7</td></tr>
+        <tr><td>WK 6 — Wed</td><td>Tempo Run</td><td>Warm 1 mi + 3 mi tempo <span class="pace-badge">7:45/mi</span> continuous + cool 1 mi</td><td>5</td></tr>
+        <tr><td>WK 6 — Sat</td><td>Long Run</td><td>8 mi easy. Peak long run of the program.</td><td>8</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="phase3" class="phase-content">
+    <table class="run-table">
+      <thead>
+        <tr>
+          <th>Week / Day</th>
+          <th>Workout Type</th>
+          <th>Details</th>
+          <th>Total Miles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>WK 7 — Mon</td><td>Race Pace Cruise</td><td>Warm 1 mi + 4 mi continuous @ 10K race pace <span class="pace-badge">7:00/mi</span> + cool 1 mi. This is the hardest workout of the program.</td><td>6</td></tr>
+        <tr><td>WK 7 — Wed</td><td>Easy Run</td><td>4 mi easy <span class="pace-badge">8:45/mi</span> — recover from Monday</td><td>4</td></tr>
+        <tr><td>WK 7 — Sat</td><td>Last Long Run</td><td>7 mi easy. Final aerobic stimulus before taper begins.</td><td>7</td></tr>
+        <tr><td>WK 8 — Mon</td><td>Sharpener</td><td>Warm 1 mi + 4 × 1 km @ <span class="pace-badge">6:45/mi</span> + 2 min rest + cool 1 mi. Crisp and controlled.</td><td>5</td></tr>
+        <tr><td>WK 8 — Wed</td><td>Easy Taper Run</td><td>3 mi easy + 4 × 20-sec strides at the end. Keep legs feeling snappy.</td><td>3.5</td></tr>
+        <tr><td>WK 8 — Fri</td><td>Pre-Race Shake Out</td><td>2 mi very easy + 4 strides. Keep it short and light. Trust the taper.</td><td>2</td></tr>
+        <tr><td>WK 8 — Sun</td><td>🔥 RACE DAY</td><td>Go out at <span class="pace-badge">7:00/mi</span> — not faster. Miles 1–3 are controlled. Miles 4–5 push. Final km: everything you have left.</td><td>6.2</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- LIFTING -->
+<section id="lifting">
+  <p class="section-label">// 04 — Olympic Lifting Progression</p>
+  <h2 class="section-title">Squat Clean &amp; Snatch</h2>
+  <p style="font-size: 0.9rem; color: var(--chrome); max-width: 700px; margin-bottom: 48px; line-height: 1.7;">
+    You haven't touched these lifts in years — treat yourself as a beginner regardless of your general fitness. The first 4 weeks are purely technical. PVC pipe and empty barbell only. Speed of progression depends on movement quality, not strength.
+  </p>
+  <div class="lift-grid">
+
+    <div class="lift-block">
+      <div class="lift-block-title"><span class="dot"></span>Weeks 1–3: Technique Only</div>
+      <div class="lift-phase-note">PVC pipe → empty bar (45 lbs). Movement pattern drills only. No load until week 3.</div>
+      <ul class="exercise-list">
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Clean Pull / Romanian Deadlift Drill</div>
+            <div class="ex-cue">Learn hip hinge, bar path close to body, big jump extension</div>
+          </div>
+          <div class="ex-sets">4 × 6</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Hang Power Clean</div>
+            <div class="ex-cue">Start above knee. Triple extension → fast elbows → front rack. PVC first 2 wks, bar week 3.</div>
+          </div>
+          <div class="ex-sets">5 × 4</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Front Squat Hold</div>
+            <div class="ex-cue">Rack position practice. Elbows up, chest tall. Pause 2 sec at bottom.</div>
+          </div>
+          <div class="ex-sets">4 × 5</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Snatch Grip Overhead Squat</div>
+            <div class="ex-cue">PVC only. Active shoulder press into bar overhead. Deepest mobility work you'll do.</div>
+          </div>
+          <div class="ex-sets">4 × 5</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Power Snatch (Hang)</div>
+            <div class="ex-cue">Wide grip, bar stays close. Jump, shrug, pull under fast. PVC + empty bar.</div>
+          </div>
+          <div class="ex-sets">5 × 3</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="lift-block">
+      <div class="lift-block-title"><span class="dot"></span>Weeks 4–6: Loading Phase</div>
+      <div class="lift-phase-note">Begin adding weight. Load only when reps feel automatic. Increase 5–10 lbs max per week.</div>
+      <ul class="exercise-list">
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Squat Clean (Full)</div>
+            <div class="ex-cue">Floor to full front squat catch. Start at 50–55% of estimated max. Focus on catching deep.</div>
+          </div>
+          <div class="ex-sets">5 × 3</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Hang Squat Clean</div>
+            <div class="ex-cue">Reinforce the pull and catch. Keep loads modest — speed > weight here.</div>
+          </div>
+          <div class="ex-sets">4 × 3</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Power Snatch → Overhead Squat complex</div>
+            <div class="ex-cue">Catch in power position, then descend into overhead squat. Builds confidence in the catch.</div>
+          </div>
+          <div class="ex-sets">4 × 2+2</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Full Squat Snatch</div>
+            <div class="ex-cue">Introduce week 6 only after power snatch + OHS feels solid. Light weight, perfect reps only.</div>
+          </div>
+          <div class="ex-sets">4 × 2</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Front Squat (moderate)</div>
+            <div class="ex-cue">Builds catch strength for the clean. Not a max effort — accessory movement.</div>
+          </div>
+          <div class="ex-sets">3 × 5</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="lift-block">
+      <div class="lift-block-title"><span class="dot"></span>Weeks 7–8: Sharpen & Taper</div>
+      <div class="lift-phase-note">Reduce lifting volume in week 7. Week 8 is maintenance only — protect legs for race day.</div>
+      <ul class="exercise-list">
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Squat Clean — Heavy Singles / Doubles</div>
+            <div class="ex-cue">Work up to challenging but not max effort. 80–85% intensity. Chase technique at heavier loads.</div>
+          </div>
+          <div class="ex-sets">5 × 2</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Squat Snatch</div>
+            <div class="ex-cue">Main snatch variation. Full squat catch. Build confidence at moderate weights.</div>
+          </div>
+          <div class="ex-sets">5 × 2</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Clean & Jerk (intro)</div>
+            <div class="ex-cue">Optional: add the jerk in weeks 9–10. Push press → push jerk progression.</div>
+          </div>
+          <div class="ex-sets">3 × 2</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Week 8: Maintenance Only</div>
+            <div class="ex-cue">2 sessions max. Light technique work only. No new loads. Preserve race-day legs.</div>
+          </div>
+          <div class="ex-sets">Low vol</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="lift-block">
+      <div class="lift-block-title"><span class="dot"></span>Accessory Work (Every Session)</div>
+      <div class="lift-phase-note">Supports the Olympic lifts and protects your body from running volume.</div>
+      <ul class="exercise-list">
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Romanian Deadlift</div>
+            <div class="ex-cue">Hip hinge strength. Hamstring + posterior chain. 3 sec eccentric.</div>
+          </div>
+          <div class="ex-sets">3 × 8</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Single-Leg Glute Bridge</div>
+            <div class="ex-cue">Runner hip stability. Controls knee valgus under load.</div>
+          </div>
+          <div class="ex-sets">3 × 12</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">Pallof Press</div>
+            <div class="ex-cue">Anti-rotation core work. Critical for Olympic lifting and running economy.</div>
+          </div>
+          <div class="ex-sets">3 × 12</div>
+        </li>
+        <li class="exercise-item">
+          <div>
+            <div class="ex-name">DB Rows / Pull-Ups</div>
+            <div class="ex-cue">Upper back strength for the clean front rack and overhead position.</div>
+          </div>
+          <div class="ex-sets">3 × 8–10</div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- MOBILITY -->
+<section id="mobility">
+  <p class="section-label">// 05 — Mobility & Joint Work</p>
+  <h2 class="section-title">KOT + Strength Side Protocol</h2>
+  <p style="font-size: 0.9rem; color: var(--chrome); max-width: 700px; margin-bottom: 48px; line-height: 1.7;">
+    These protocols run 3–4× per week — they're your pre-lift warm-up and running recovery system. Search YouTube for each creator for video demonstrations. Time investment: 15–20 minutes per session.
+  </p>
+  <div class="mob-grid">
+    <div class="mob-card">
+      <div class="mob-source">Knees Over Toes Guy — ATG Training</div>
+      <div class="mob-title">Knee & Lower Body Restoration</div>
+      <ul class="mob-list">
+        <li><strong>ATG Split Squat</strong> — The cornerstone. Knee tracking over pinky toe, full range of motion. Start bodyweight, add load over weeks. Rebuilds patellar tendon and quad strength through full range.</li>
+        <li><strong>Patrick Step / Tibialis Raise</strong> — Shin strength and ankle dorsiflexion. Do 2–3 × 25 daily. Prevents shin splints and foot strike issues in runners.</li>
+        <li><strong>Reverse Sled Walk / Nordic Curl</strong> — If you have access to a sled, reverse drags are gold. Nordics protect hamstrings from running eccentric load.</li>
+        <li><strong>ATG Calf Raise (single leg)</strong> — Slow, full range (heel below foot level). Bulletproofs the Achilles. 3 × 15 each leg.</li>
+        <li><strong>Hip Flexor Stretch + Couch Stretch</strong> — Reverses sitting tightness. Hold 2 min each side. Critical for clean squat depth.</li>
+      </ul>
+    </div>
+    <div class="mob-card">
+      <div class="mob-source">Strength Side — Athletic Mobility</div>
+      <div class="mob-title">Hip, Ankle & Overhead Mobility</div>
+      <ul class="mob-list">
+        <li><strong>90/90 Hip Rotation Flow</strong> — Internal and external hip rotation. Daily habit. Directly transfers to squat clean depth and running stride freedom.</li>
+        <li><strong>Ankle Dorsiflexion Progression</strong> — Wall ankle stretches + banded distraction. Non-negotiable for overhead squat in snatch. Do every session.</li>
+        <li><strong>Thoracic Spine Opener</strong> — T-spine rotation and extension on foam roller. Opens the overhead position for snatch. 10 reps per side.</li>
+        <li><strong>Deep Squat Hold Progression</strong> — Assisted deep squat with door frame or rack. Work toward 5-min hold over 12 weeks. Transforms clean catch position.</li>
+        <li><strong>Shoulder Capsule Work</strong> — Banded shoulder distraction + sleeper stretch. Protects overhead position in snatch, prevents rotator cuff irritation from volume.</li>
+      </ul>
+    </div>
+    <div class="mob-card">
+      <div class="mob-source">Running-Specific Recovery</div>
+      <div class="mob-title">Post-Run Routine (10 min)</div>
+      <ul class="mob-list">
+        <li><strong>Standing Hip Flexor Stretch</strong> — 90 sec each side. Addresses stride restriction from heavy run volume.</li>
+        <li><strong>Pigeon Pose</strong> — 2 min each side after long runs. Glute and external rotator recovery.</li>
+        <li><strong>Calf + Achilles Downward Dog Walk</strong> — Alternating heel presses. 60 sec. Flushes the lower leg post-run.</li>
+        <li><strong>Supine Figure-4</strong> — Piriformis and IT band adjacent. 90 sec each side. Add on interval days.</li>
+        <li><strong>Diaphragmatic Breathing</strong> — 5 min of slow belly breathing post-run. Activates parasympathetic recovery. Speeds adaptation.</li>
+      </ul>
+    </div>
+    <div class="mob-card">
+      <div class="mob-source">Before Every Lifting Session</div>
+      <div class="mob-title">10-Min Barbell Prep Warm-Up</div>
+      <ul class="mob-list">
+        <li><strong>World's Greatest Stretch</strong> — 5 reps each side. Hip flexor, thoracic, and hamstring all at once. Best pre-lift mobility drill.</li>
+        <li><strong>PVC Overhead Squat</strong> — 3 × 5. Diagnoses your tightest links — ankles, hips, or thoracic. Work on what's tight.</li>
+        <li><strong>Banded Ankle Distraction</strong> — 15 reps each side, in squat position. Immediately increases dorsiflexion for clean depth.</li>
+        <li><strong>Hip 90/90 + Shoulder CARs</strong> — Controlled articular rotations. Prepares joints through full active range before loading.</li>
+        <li><strong>Snatch Grip Press (PVC)</strong> — 2 × 10 overhead press with wide grip. Activates rotator cuff and scapular stabilizers before snatch work.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESSION OVERVIEW -->
+<section id="progression">
+  <p class="section-label">// 06 — The Arc</p>
+  <h2 class="section-title">8-Week Progression Map</h2>
+  <div class="prog-timeline">
+    <div class="prog-item">
+      <div class="prog-week">Weeks 1–3 — Phase 1: Foundation</div>
+      <div class="prog-title">Build The Engine</div>
+      <p class="prog-body">Running volume is low and easy — this is intentional. Your tendons, joints, and aerobic system are adapting. Lifting is technique-only with PVC and empty bar through week 2, then introduces the empty barbell in week 3. Mobility is introduced as a daily habit. Don't be tempted to run faster or add weight — the body is quietly building.</p>
+    </div>
+    <div class="prog-item">
+      <div class="prog-week">Weeks 4–6 — Phase 2: Build</div>
+      <div class="prog-title">Add Intensity & Load</div>
+      <p class="prog-body">Now you earn the hard work. 800m intervals, mile repeats, and tempo runs introduce real speed stress. Long runs push to 7–8 miles. Olympic lifting adds load for the first time — start at 50–55% of estimated max and add 5–10 lbs per session only when form is clean. Your mobility baseline is set, so joint prep becomes more targeted.</p>
+    </div>
+    <div class="prog-item">
+      <div class="prog-week">Week 7 — Phase 3: Sharpen</div>
+      <div class="prog-title">Race-Specific Work</div>
+      <p class="prog-body">The key workout of the entire program: 4 continuous miles at 10K race pace. This teaches your body and mind to hold the effort. Long run is cut to 7 miles to begin protecting your legs. Lifting volume drops — two sessions, moderate loads, technique focus only. This week should feel hard but not wrecked.</p>
+    </div>
+    <div class="prog-item">
+      <div class="prog-week">Week 8 — Taper & Race</div>
+      <div class="prog-title">Execute</div>
+      <p class="prog-body">Volume drops sharply. Short easy runs with crisp strides keep your neuromuscular system primed without accumulating fatigue. Lifting is one light session maximum. Sleep 8+ hours every night. Trust that the work is done — adaptation happens during recovery, not during the final week. Race day: go out at exactly 7:00/mi. Don't let the crowd pull you out too fast.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NOTES -->
+<section>
+  <p class="section-label">// 07 — Key Rules</p>
+  <h2 class="section-title">Non-Negotiables</h2>
+  <div class="philosophy-grid">
+    <div class="phil-card">
+      <div class="phil-title">Never Skip Recovery Weeks</div>
+      <p class="phil-body">There are no dedicated recovery weeks in this 8-week plan — the taper IS your recovery. This means you must not add extra volume on feel-good days during the program. If you feel great on an easy day, that means the training is working. Stick to the script.</p>
+    </div>
+    <div class="phil-card">
+      <div class="phil-title">Lifting & Running Fatigue Stack</div>
+      <p class="phil-body">Olympic lifting taxes the same energy system as interval running. Never do a max effort lift the day before a speed workout. Tuesday/Thursday lifting, Monday/Saturday hard running creates the necessary separation.</p>
+    </div>
+    <div class="phil-card">
+      <div class="phil-title">Easy Runs Must Be Easy</div>
+      <p class="phil-body">If you can't maintain a conversation on an easy day, you're too fast. Use a HR monitor: stay under 75% of max HR. Most runners run easy days 30–45 sec/mile too fast and wonder why they're always tired.</p>
+    </div>
+    <div class="phil-card">
+      <div class="phil-title">Technique Failures = Stop Lifting</div>
+      <p class="phil-body">In the snatch and clean, if the bar crashes, you round your back, or you miss a catch, the weight is too heavy. Strip 10–15 lbs and rebuild from there. Form breaks are always a sign of too much load, not insufficient effort.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">10K FORGE</div>
+  <p class="footer-note">Custom Program — 8 Weeks to Race Day</p>
+  <p class="footer-note">Not Medical Advice — Listen To Your Body</p>
+</footer>
+
+<script>
+  function showPhase(id) {
+    document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.phase-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
